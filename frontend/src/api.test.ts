@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { getWeather } from './api';
 
-const reading = { city: 'Riga', temperatureC: 12, condition: 'Cloudy', humidityPercent: 75 };
+const reading = { city: 'Riga', temperatureC: 12, condition: 'Cloudy', humidityPercent: 75, feelsLikeC: 10.5 };
 
 describe('getWeather', () => {
   it('returns the reading and encodes the untrimmed city in the URL', async () => {
@@ -36,5 +36,10 @@ describe('getWeather', () => {
   it.each([null, { city: 'Riga' }, { ...reading, humidityPercent: '75' }])('rejects malformed readings: %s', async body => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json(body)));
     await expect(getWeather('Riga')).rejects.toThrow('invalid reading');
+  });
+
+  it.each([undefined, '10.5', null, true, {}])('rejects missing or nonnumeric feelsLikeC: %s', async feelsLikeC => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json({ ...reading, feelsLikeC })));
+    await expect(getWeather('Riga')).rejects.toThrow('The weather service returned an invalid reading.');
   });
 });

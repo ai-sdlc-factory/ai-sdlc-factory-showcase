@@ -54,6 +54,7 @@ export default function App() {
           <h2>{state.reading.city}</h2>
           <dl>
             <div><dt>Temperature</dt><dd>{state.reading.temperatureC} °C</dd></div>
+            <div><dt>Feels like</dt><dd>{state.reading.feelsLikeC} °C</dd></div>
             <div><dt>Condition</dt><dd>{state.reading.condition}</dd></div>
             <div><dt>Humidity</dt><dd>{state.reading.humidityPercent}%</dd></div>
           </dl>

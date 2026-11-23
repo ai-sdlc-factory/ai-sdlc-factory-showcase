@@ -6,17 +6,29 @@ namespace Weather.Api.Tests;
 public class WeatherReportTests
 {
     [Theory]
-    [InlineData("Riga", 12, "Cloudy", 75)]
-    [InlineData("London", 15, "Rainy", 80)]
-    [InlineData("Oslo", 8, "Cloudy", 65)]
-    [InlineData("Madrid", 26, "Sunny", 35)]
-    [InlineData("Cairo", 32, "Sunny", 25)]
-    public void ReturnsFixedReadings(string city, int temperature, string condition, int humidity)
+    [InlineData("Riga", 12, "Cloudy", 75, 10.5)]
+    [InlineData("London", 15, "Rainy", 80, 13)]
+    [InlineData("Oslo", 8, "Cloudy", 65, 7.5)]
+    [InlineData("Madrid", 26, "Sunny", 35, 26)]
+    [InlineData("Cairo", 32, "Sunny", 25, 32)]
+    public void ReturnsFixedReadings(string city, int temperature, string condition, int humidity, decimal feelsLike)
     {
         var result = WeatherReport.Lookup(city);
         Assert.Equal(LookupStatus.Success, result.Status);
         Assert.Equal(new WeatherReading(city, temperature, condition, humidity), result.Reading);
+        Assert.Equal(feelsLike, result.Reading!.FeelsLikeC);
         Assert.Equal(result, WeatherReport.Lookup(city));
+    }
+
+    [Theory]
+    [InlineData(59, 12)]
+    [InlineData(60, 12)]
+    [InlineData(61, 11.9)]
+    [InlineData(75, 10.5)]
+    public void CalculatesFeelsLikeFromHumidity(int humidity, decimal expected)
+    {
+        var reading = new WeatherReading("Test city", 12, "Cloudy", humidity);
+        Assert.Equal(expected, reading.FeelsLikeC);
     }
 
     [Theory]

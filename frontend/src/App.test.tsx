@@ -5,7 +5,7 @@ import App from './App';
 import { getWeather, type WeatherReading } from './api';
 
 vi.mock('./api', () => ({ getWeather: vi.fn() }));
-const reading: WeatherReading = { city: 'Riga', temperatureC: 12, condition: 'Cloudy', humidityPercent: 75 };
+const reading: WeatherReading = { city: 'Riga', temperatureC: 12, condition: 'Cloudy', humidityPercent: 75, feelsLikeC: 10.5 };
 
 beforeEach(() => vi.mocked(getWeather).mockReset());
 
@@ -32,9 +32,21 @@ describe('weather search', () => {
     const result = screen.getByRole('status', { name: 'Weather reading' });
     expect(result).toHaveTextContent('Riga');
     expect(result).toHaveTextContent('Temperature12 °C');
+    expect(result).toHaveTextContent('Temperature12 °CFeels like10.5 °CCondition');
     expect(result).toHaveTextContent('ConditionCloudy');
     expect(result).toHaveTextContent('Humidity75%');
     expect(screen.getByRole('button', { name: 'Get weather' })).toBeEnabled();
+  });
+
+  it('displays an integer feels-like value without a trailing decimal zero', async () => {
+    vi.mocked(getWeather).mockResolvedValue({ city: 'London', temperatureC: 15, condition: 'Rainy', humidityPercent: 80, feelsLikeC: 13 });
+    const user = userEvent.setup();
+    render(<App />);
+    await user.type(screen.getByLabelText('City'), 'London');
+    await user.click(screen.getByRole('button', { name: 'Get weather' }));
+    const result = await screen.findByRole('status', { name: 'Weather reading' });
+    expect(result).toHaveTextContent('Temperature15 °CFeels like13 °CCondition');
+    expect(result).not.toHaveTextContent('13.0');
   });
 
   it('announces an error and allows a successful retry', async () => {
