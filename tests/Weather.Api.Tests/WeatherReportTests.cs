@@ -5,18 +5,42 @@ namespace Weather.Api.Tests;
 
 public class WeatherReportTests
 {
+    [Fact]
+    public void ReturnsCanonicalCitiesInOrdinalOrder()
+    {
+        var cities = WeatherReport.GetCities();
+        Assert.Equal(new[] { "Cairo", "London", "Madrid", "Oslo", "Riga" }, cities);
+        foreach (var city in cities)
+            Assert.Equal(city, WeatherReport.Lookup(city).Reading?.City);
+    }
+
     [Theory]
-    [InlineData("Riga", 12, "Cloudy", 75)]
-    [InlineData("London", 15, "Rainy", 80)]
-    [InlineData("Oslo", 8, "Cloudy", 65)]
-    [InlineData("Madrid", 26, "Sunny", 35)]
-    [InlineData("Cairo", 32, "Sunny", 25)]
-    public void ReturnsFixedReadings(string city, int temperature, string condition, int humidity)
+    [InlineData("Riga", 12, "Cloudy", 75, "2026-01-15T09:00:00Z", 10.5)]
+    [InlineData("London", 15, "Rainy", 80, "2026-01-15T09:00:00Z", 13)]
+    [InlineData("Oslo", 8, "Cloudy", 65, "2026-01-15T09:00:00Z", 7.5)]
+    [InlineData("Madrid", 26, "Sunny", 35, "2026-01-15T09:00:00Z", 26)]
+    [InlineData("Cairo", 32, "Sunny", 25, "2026-01-15T09:00:00Z", 32)]
+    public void ReturnsFixedReadings(string city, int temperature, string condition, int humidity, string observedAt, decimal feelsLike)
     {
         var result = WeatherReport.Lookup(city);
         Assert.Equal(LookupStatus.Success, result.Status);
-        Assert.Equal(new WeatherReading(city, temperature, condition, humidity), result.Reading);
+        var expectedObservedAt = DateTime.Parse(observedAt, System.Globalization.CultureInfo.InvariantCulture,
+            System.Globalization.DateTimeStyles.RoundtripKind);
+        Assert.Equal(new WeatherReading(city, temperature, condition, humidity, expectedObservedAt), result.Reading);
+        Assert.Equal(DateTimeKind.Utc, result.Reading!.ObservedAt.Kind);
+        Assert.Equal(feelsLike, result.Reading!.FeelsLikeC);
         Assert.Equal(result, WeatherReport.Lookup(city));
+    }
+
+    [Theory]
+    [InlineData(59, 12)]
+    [InlineData(60, 12)]
+    [InlineData(61, 11.9)]
+    [InlineData(75, 10.5)]
+    public void CalculatesFeelsLikeFromHumidity(int humidity, decimal expected)
+    {
+        var reading = new WeatherReading("Test city", 12, "Cloudy", humidity, new DateTime(2026, 1, 15, 9, 0, 0, DateTimeKind.Utc));
+        Assert.Equal(expected, reading.FeelsLikeC);
     }
 
     [Theory]

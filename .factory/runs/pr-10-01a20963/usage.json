@@ -1,0 +1,117 @@
+{
+  "note": "Tokens and cost as reported by OpenCode. Cost is 0 with a ChatGPT login. The model is the one configured for the role.",
+  "total": {
+    "input": 35043,
+    "output": 1225,
+    "reasoning": 13,
+    "cache_read": 125312,
+    "cache_write": 0,
+    "total": 161593,
+    "cost": 0,
+    "model_steps": 12,
+    "partial": false
+  },
+  "by_role": {
+    "pr-resolver": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 21332,
+        "output": 808,
+        "reasoning": 13,
+        "cache_read": 118016,
+        "cache_write": 0,
+        "total": 140169,
+        "cost": 0,
+        "model_steps": 8,
+        "partial": false
+      }
+    },
+    "reviewer": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 6928,
+        "output": 227,
+        "reasoning": 0,
+        "cache_read": 3456,
+        "cache_write": 0,
+        "total": 10611,
+        "cost": 0,
+        "model_steps": 2,
+        "partial": false
+      }
+    },
+    "security": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 6783,
+        "output": 190,
+        "reasoning": 0,
+        "cache_read": 3840,
+        "cache_write": 0,
+        "total": 10813,
+        "cost": 0,
+        "model_steps": 2,
+        "partial": false
+      }
+    }
+  },
+  "steps": [
+    {
+      "step": 1,
+      "role": "pr-resolver",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 71.3,
+      "usage": {
+        "input": 21332,
+        "output": 808,
+        "reasoning": 13,
+        "cache_read": 118016,
+        "cache_write": 0,
+        "total": 140169,
+        "cost": 0,
+        "model_steps": 8,
+        "partial": false
+      }
+    },
+    {
+      "step": 8,
+      "role": "reviewer",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 12.9,
+      "usage": {
+        "input": 6928,
+        "output": 227,
+        "reasoning": 0,
+        "cache_read": 3456,
+        "cache_write": 0,
+        "total": 10611,
+        "cost": 0,
+        "model_steps": 2,
+        "partial": false
+      }
+    },
+    {
+      "step": 9,
+      "role": "security",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 9.1,
+      "usage": {
+        "input": 6783,
+        "output": 190,
+        "reasoning": 0,
+        "cache_read": 3840,
+        "cache_write": 0,
+        "total": 10813,
+        "cost": 0,
+        "model_steps": 2,
+        "partial": false
+      }
+    }
+  ]
+}
