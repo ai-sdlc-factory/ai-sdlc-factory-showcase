@@ -32,16 +32,24 @@ or explicitly configure trusted origins for the deployment.
 `GET /api/weather/Riga` returns:
 
 ```json
-{"city":"Riga","temperatureC":12,"condition":"Cloudy","humidityPercent":75,"observedAt":"2026-01-15T09:00:00Z"}
+{"city":"Riga","temperatureC":12,"condition":"Cloudy","humidityPercent":75,"observedAt":"2026-01-15T09:00:00Z","feelsLikeC":10.5}
 ```
 
 `observedAt` is a fixed, simulated UTC observation time, not the request time.
 The page displays it using the browser's locale and local time zone.
+`feelsLikeC` is a simulated Celsius value calculated as
+`temperatureC - 0.1 * max(0, humidityPercent - 60)`, rounded to one decimal place.
 
 Names are case-insensitive and surrounding spaces are trimmed. The original input
 must be at most 60 characters and contain only Unicode letters, spaces, hyphens or
 apostrophes. Missing, empty or invalid input returns 400; a valid but unknown city
 returns 404. Both errors have the shape `{"error":"A descriptive message."}`.
+
+`GET /api/cities` returns the supported city names in alphabetical order:
+
+```json
+[{"name":"Cairo"},{"name":"London"},{"name":"Madrid"},{"name":"Oslo"},{"name":"Riga"}]
+```
 
 ## Checks
 
