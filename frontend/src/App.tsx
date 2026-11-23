@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import { version } from '../package.json';
 import { getWeather, type WeatherReading } from './api';
 
 type SearchState =
@@ -59,6 +60,7 @@ export default function App() {
           </dl>
         </section>
       )}
+      <footer>Weather v{version}</footer>
     </main>
   );
 }

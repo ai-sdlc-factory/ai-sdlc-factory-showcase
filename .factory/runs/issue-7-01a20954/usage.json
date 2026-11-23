@@ -1,0 +1,282 @@
+{
+  "note": "Tokens and cost as reported by OpenCode. Cost is 0 with a ChatGPT login. The model is the one configured for the role.",
+  "total": {
+    "input": 96977,
+    "output": 4728,
+    "reasoning": 238,
+    "cache_read": 81664,
+    "cache_write": 0,
+    "total": 183607,
+    "cost": 0,
+    "model_steps": 28,
+    "partial": false
+  },
+  "by_role": {
+    "analyst": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 5873,
+        "output": 473,
+        "reasoning": 60,
+        "cache_read": 11136,
+        "cache_write": 0,
+        "total": 17542,
+        "cost": 0,
+        "model_steps": 4,
+        "partial": false
+      }
+    },
+    "coverage": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 7481,
+        "output": 581,
+        "reasoning": 60,
+        "cache_read": 11776,
+        "cache_write": 0,
+        "total": 19898,
+        "cost": 0,
+        "model_steps": 4,
+        "partial": false
+      }
+    },
+    "architect": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 11870,
+        "output": 1254,
+        "reasoning": 79,
+        "cache_read": 7680,
+        "cache_write": 0,
+        "total": 20883,
+        "cost": 0,
+        "model_steps": 4,
+        "partial": false
+      }
+    },
+    "developer": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 21035,
+        "output": 1147,
+        "reasoning": 14,
+        "cache_read": 46848,
+        "cache_write": 0,
+        "total": 69044,
+        "cost": 0,
+        "model_steps": 8,
+        "partial": false
+      }
+    },
+    "reviewer": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 13962,
+        "output": 249,
+        "reasoning": 25,
+        "cache_read": 0,
+        "cache_write": 0,
+        "total": 14236,
+        "cost": 0,
+        "model_steps": 2,
+        "partial": false
+      }
+    },
+    "security": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 15141,
+        "output": 254,
+        "reasoning": 0,
+        "cache_read": 0,
+        "cache_write": 0,
+        "total": 15395,
+        "cost": 0,
+        "model_steps": 2,
+        "partial": false
+      }
+    },
+    "ux": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 8406,
+        "output": 242,
+        "reasoning": 0,
+        "cache_read": 4224,
+        "cache_write": 0,
+        "total": 12872,
+        "cost": 0,
+        "model_steps": 2,
+        "partial": false
+      }
+    },
+    "acceptance": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 13209,
+        "output": 528,
+        "reasoning": 0,
+        "cache_read": 0,
+        "cache_write": 0,
+        "total": 13737,
+        "cost": 0,
+        "model_steps": 2,
+        "partial": false
+      }
+    }
+  },
+  "steps": [
+    {
+      "step": 1,
+      "role": "analyst",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 34,
+      "usage": {
+        "input": 5873,
+        "output": 473,
+        "reasoning": 60,
+        "cache_read": 11136,
+        "cache_write": 0,
+        "total": 17542,
+        "cost": 0,
+        "model_steps": 4,
+        "partial": false
+      }
+    },
+    {
+      "step": 2,
+      "role": "coverage",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 69.6,
+      "usage": {
+        "input": 7481,
+        "output": 581,
+        "reasoning": 60,
+        "cache_read": 11776,
+        "cache_write": 0,
+        "total": 19898,
+        "cost": 0,
+        "model_steps": 4,
+        "partial": false
+      }
+    },
+    {
+      "step": 3,
+      "role": "architect",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 40.4,
+      "usage": {
+        "input": 11870,
+        "output": 1254,
+        "reasoning": 79,
+        "cache_read": 7680,
+        "cache_write": 0,
+        "total": 20883,
+        "cost": 0,
+        "model_steps": 4,
+        "partial": false
+      }
+    },
+    {
+      "step": 4,
+      "role": "developer",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 119.9,
+      "usage": {
+        "input": 21035,
+        "output": 1147,
+        "reasoning": 14,
+        "cache_read": 46848,
+        "cache_write": 0,
+        "total": 69044,
+        "cost": 0,
+        "model_steps": 8,
+        "partial": false
+      }
+    },
+    {
+      "step": 11,
+      "role": "reviewer",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 15,
+      "usage": {
+        "input": 13962,
+        "output": 249,
+        "reasoning": 25,
+        "cache_read": 0,
+        "cache_write": 0,
+        "total": 14236,
+        "cost": 0,
+        "model_steps": 2,
+        "partial": false
+      }
+    },
+    {
+      "step": 12,
+      "role": "security",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 25.2,
+      "usage": {
+        "input": 15141,
+        "output": 254,
+        "reasoning": 0,
+        "cache_read": 0,
+        "cache_write": 0,
+        "total": 15395,
+        "cost": 0,
+        "model_steps": 2,
+        "partial": false
+      }
+    },
+    {
+      "step": 13,
+      "role": "ux",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 24.5,
+      "usage": {
+        "input": 8406,
+        "output": 242,
+        "reasoning": 0,
+        "cache_read": 4224,
+        "cache_write": 0,
+        "total": 12872,
+        "cost": 0,
+        "model_steps": 2,
+        "partial": false
+      }
+    },
+    {
+      "step": 14,
+      "role": "acceptance",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 23,
+      "usage": {
+        "input": 13209,
+        "output": 528,
+        "reasoning": 0,
+        "cache_read": 0,
+        "cache_write": 0,
+        "total": 13737,
+        "cost": 0,
+        "model_steps": 2,
+        "partial": false
+      }
+    }
+  ]
+}
