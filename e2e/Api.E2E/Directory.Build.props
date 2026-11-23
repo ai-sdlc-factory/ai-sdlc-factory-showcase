@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <BaseIntermediateOutputPath>/tmp/weather-footer-api-obj/</BaseIntermediateOutputPath>
+    <BaseOutputPath>/tmp/weather-footer-api-bin/</BaseOutputPath>
+  </PropertyGroup>
+</Project>

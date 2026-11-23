@@ -1,0 +1,102 @@
+{
+  "note": "Tokens and cost as reported by OpenCode. Cost is 0 with a ChatGPT login. The model is the one configured for the role.",
+  "total": {
+    "input": 70363,
+    "output": 9444,
+    "reasoning": 1596,
+    "cache_read": 782592,
+    "cache_write": 0,
+    "total": 863995,
+    "cost": 0,
+    "model_steps": 39,
+    "partial": false
+  },
+  "by_role": {
+    "e2e-tester": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 2,
+      "usage": {
+        "input": 56994,
+        "output": 9187,
+        "reasoning": 1596,
+        "cache_read": 778112,
+        "cache_write": 0,
+        "total": 845889,
+        "cost": 0,
+        "model_steps": 36,
+        "partial": false
+      }
+    },
+    "ux": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 13369,
+        "output": 257,
+        "reasoning": 0,
+        "cache_read": 4480,
+        "cache_write": 0,
+        "total": 18106,
+        "cost": 0,
+        "model_steps": 3,
+        "partial": false
+      }
+    }
+  },
+  "steps": [
+    {
+      "step": 1,
+      "role": "e2e-tester",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 225.9,
+      "usage": {
+        "input": 31383,
+        "output": 5751,
+        "reasoning": 876,
+        "cache_read": 483968,
+        "cache_write": 0,
+        "total": 521978,
+        "cost": 0,
+        "model_steps": 17,
+        "partial": false
+      }
+    },
+    {
+      "step": 4,
+      "role": "e2e-tester",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 266.4,
+      "usage": {
+        "input": 25611,
+        "output": 3436,
+        "reasoning": 720,
+        "cache_read": 294144,
+        "cache_write": 0,
+        "total": 323911,
+        "cost": 0,
+        "model_steps": 19,
+        "partial": false
+      }
+    },
+    {
+      "step": 7,
+      "role": "ux",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 13.9,
+      "usage": {
+        "input": 13369,
+        "output": 257,
+        "reasoning": 0,
+        "cache_read": 4480,
+        "cache_write": 0,
+        "total": 18106,
+        "cost": 0,
+        "model_steps": 3,
+        "partial": false
+      }
+    }
+  ]
+}

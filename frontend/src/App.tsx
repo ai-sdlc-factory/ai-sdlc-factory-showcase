@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import { version } from '../package.json';
 import { getWeather, type WeatherReading } from './api';
 
 type SearchState =
@@ -61,6 +62,7 @@ export default function App() {
           <p>Observed at <time dateTime={state.reading.observedAt}>{new Date(state.reading.observedAt).toLocaleString()}</time></p>
         </section>
       )}
+      <footer>Weather v{version}</footer>
     </main>
   );
 }

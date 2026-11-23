@@ -1,0 +1,20 @@
+{
+  "name": "weather-footer-e2e",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@playwright/test": "1.52.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.0",
+    "@testing-library/user-event": "14.6.1",
+    "@types/node": "22.19.0",
+    "@types/react": "19.2.0",
+    "@types/react-dom": "19.2.0",
+    "jsdom": "27.2.0",
+    "typescript": "5.9.3",
+    "vite": "7.2.2",
+    "vitest": "4.0.9"
+  }
+}

@@ -1,6 +1,7 @@
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { version } from '../package.json';
 import App from './App';
 import { getWeather, type WeatherReading } from './api';
 
@@ -16,6 +17,9 @@ describe('weather search', () => {
     expect(screen.getByRole('button', { name: 'Get weather' })).toBeEnabled();
     expect(screen.queryByRole('status')).not.toBeInTheDocument();
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    const footer = screen.getByText(`Weather v${version}`, { exact: true });
+    expect(footer.tagName).toBe('FOOTER');
+    expect(footer).toBeVisible();
   });
 
   it('shows loading, then announces all reading fields after keyboard submission', async () => {
@@ -28,6 +32,7 @@ describe('weather search', () => {
     expect(getWeather).toHaveBeenCalledWith(' Riga ');
     expect(screen.getByRole('status')).toHaveTextContent('Loading weather');
     expect(screen.getByRole('button', { name: 'Searching…' })).toBeDisabled();
+    expect(screen.getByText(`Weather v${version}`, { exact: true })).toBeVisible();
     await act(async () => resolveReading(reading));
     const result = screen.getByRole('status', { name: 'Weather reading' });
     expect(result).toHaveTextContent('Riga');
@@ -41,6 +46,9 @@ describe('weather search', () => {
     expect(time).toHaveTextContent(new Date(reading.observedAt).toLocaleString());
     expect(result.querySelector('dl')?.nextElementSibling).toContainElement(time);
     expect(screen.getByRole('button', { name: 'Get weather' })).toBeEnabled();
+    const footer = screen.getByText(`Weather v${version}`, { exact: true });
+    expect(footer).toBeVisible();
+    expect(result.compareDocumentPosition(footer) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   it('displays an integer feels-like value without a trailing decimal zero', async () => {
@@ -62,11 +70,13 @@ describe('weather search', () => {
     await user.click(screen.getByRole('button', { name: 'Get weather' }));
     expect(await screen.findByRole('alert')).toHaveTextContent('No reading for this city.');
     expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.getByText(`Weather v${version}`, { exact: true })).toBeVisible();
     await user.clear(screen.getByLabelText('City'));
     await user.type(screen.getByLabelText('City'), 'Riga');
     await user.click(screen.getByRole('button', { name: 'Get weather' }));
     expect(await screen.findByRole('status')).toHaveTextContent('Riga');
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    expect(screen.getByText(`Weather v${version}`, { exact: true })).toBeVisible();
   });
 
   it('clears a previous success when the next request fails', async () => {
