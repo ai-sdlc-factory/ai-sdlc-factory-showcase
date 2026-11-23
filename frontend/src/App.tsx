@@ -57,6 +57,7 @@ export default function App() {
             <div><dt>Condition</dt><dd>{state.reading.condition}</dd></div>
             <div><dt>Humidity</dt><dd>{state.reading.humidityPercent}%</dd></div>
           </dl>
+          <p>Observed at <time dateTime={state.reading.observedAt}>{new Date(state.reading.observedAt).toLocaleString()}</time></p>
         </section>
       )}
     </main>

@@ -13,23 +13,24 @@ public class WeatherApiTests : IClassFixture<WebApplicationFactory<Program>>
     public WeatherApiTests(WebApplicationFactory<Program> factory) => this.factory = factory;
 
     [Theory]
-    [InlineData("Riga", "Riga", 12, "Cloudy", 75)]
-    [InlineData("lONDON", "London", 15, "Rainy", 80)]
-    [InlineData(" Oslo ", "Oslo", 8, "Cloudy", 65)]
-    [InlineData("Madrid", "Madrid", 26, "Sunny", 35)]
-    [InlineData("Cairo", "Cairo", 32, "Sunny", 25)]
-    public async Task ReturnsReadingContract(string input, string city, int temperature, string condition, int humidity)
+    [InlineData("Riga", "Riga", 12, "Cloudy", 75, "2026-01-15T09:00:00Z")]
+    [InlineData("lONDON", "London", 15, "Rainy", 80, "2026-01-15T09:00:00Z")]
+    [InlineData(" Oslo ", "Oslo", 8, "Cloudy", 65, "2026-01-15T09:00:00Z")]
+    [InlineData("Madrid", "Madrid", 26, "Sunny", 35, "2026-01-15T09:00:00Z")]
+    [InlineData("Cairo", "Cairo", 32, "Sunny", 25, "2026-01-15T09:00:00Z")]
+    public async Task ReturnsReadingContract(string input, string city, int temperature, string condition, int humidity, string observedAt)
     {
         using var client = factory.CreateClient();
         using var response = await client.GetAsync("/api/weather/" + Uri.EscapeDataString(input));
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         using var json = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
         var reading = json.RootElement;
-        Assert.Equal(4, reading.EnumerateObject().Count());
+        Assert.Equal(5, reading.EnumerateObject().Count());
         Assert.Equal(city, reading.GetProperty("city").GetString());
         Assert.Equal(temperature, reading.GetProperty("temperatureC").GetInt32());
         Assert.Equal(condition, reading.GetProperty("condition").GetString());
         Assert.Equal(humidity, reading.GetProperty("humidityPercent").GetInt32());
+        Assert.Equal(observedAt, reading.GetProperty("observedAt").GetString());
     }
 
     [Theory]

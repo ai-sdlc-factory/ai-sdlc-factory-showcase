@@ -32,8 +32,11 @@ or explicitly configure trusted origins for the deployment.
 `GET /api/weather/Riga` returns:
 
 ```json
-{"city":"Riga","temperatureC":12,"condition":"Cloudy","humidityPercent":75}
+{"city":"Riga","temperatureC":12,"condition":"Cloudy","humidityPercent":75,"observedAt":"2026-01-15T09:00:00Z"}
 ```
+
+`observedAt` is a fixed, simulated UTC observation time, not the request time.
+The page displays it using the browser's locale and local time zone.
 
 Names are case-insensitive and surrounding spaces are trimmed. The original input
 must be at most 60 characters and contain only Unicode letters, spaces, hyphens or

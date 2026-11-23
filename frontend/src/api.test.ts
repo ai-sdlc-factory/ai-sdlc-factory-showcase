@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { getWeather } from './api';
 
-const reading = { city: 'Riga', temperatureC: 12, condition: 'Cloudy', humidityPercent: 75 };
+const reading = { city: 'Riga', temperatureC: 12, condition: 'Cloudy', humidityPercent: 75, observedAt: '2026-01-15T09:00:00Z' };
 
 describe('getWeather', () => {
   it('returns the reading and encodes the untrimmed city in the URL', async () => {
@@ -36,5 +36,16 @@ describe('getWeather', () => {
   it.each([null, { city: 'Riga' }, { ...reading, humidityPercent: '75' }])('rejects malformed readings: %s', async body => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json(body)));
     await expect(getWeather('Riga')).rejects.toThrow('invalid reading');
+  });
+
+  it('rejects a missing observation time on an otherwise valid reading', async () => {
+    const { observedAt: _observedAt, ...withoutObservedAt } = reading;
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json(withoutObservedAt)));
+    await expect(getWeather('Riga')).rejects.toThrow('The weather service returned an invalid reading.');
+  });
+
+  it.each([null, 123, '', 'not a timestamp'])('rejects an invalid observation time: %s', async observedAt => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json({ ...reading, observedAt })));
+    await expect(getWeather('Riga')).rejects.toThrow('The weather service returned an invalid reading.');
   });
 });

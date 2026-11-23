@@ -1,6 +1,6 @@
 namespace Weather.Api;
 
-public sealed record WeatherReading(string City, int TemperatureC, string Condition, int HumidityPercent);
+public sealed record WeatherReading(string City, int TemperatureC, string Condition, int HumidityPercent, DateTime ObservedAt);
 
 public enum LookupStatus { Success, Invalid, NotFound }
 
@@ -10,11 +10,11 @@ public static class WeatherReport
 {
     private static readonly Dictionary<string, WeatherReading> Readings = new(StringComparer.OrdinalIgnoreCase)
     {
-        ["Riga"] = new("Riga", 12, "Cloudy", 75),
-        ["London"] = new("London", 15, "Rainy", 80),
-        ["Oslo"] = new("Oslo", 8, "Cloudy", 65),
-        ["Madrid"] = new("Madrid", 26, "Sunny", 35),
-        ["Cairo"] = new("Cairo", 32, "Sunny", 25)
+        ["Riga"] = new("Riga", 12, "Cloudy", 75, new DateTime(2026, 1, 15, 9, 0, 0, DateTimeKind.Utc)),
+        ["London"] = new("London", 15, "Rainy", 80, new DateTime(2026, 1, 15, 9, 0, 0, DateTimeKind.Utc)),
+        ["Oslo"] = new("Oslo", 8, "Cloudy", 65, new DateTime(2026, 1, 15, 9, 0, 0, DateTimeKind.Utc)),
+        ["Madrid"] = new("Madrid", 26, "Sunny", 35, new DateTime(2026, 1, 15, 9, 0, 0, DateTimeKind.Utc)),
+        ["Cairo"] = new("Cairo", 32, "Sunny", 25, new DateTime(2026, 1, 15, 9, 0, 0, DateTimeKind.Utc))
     };
 
     public static WeatherLookup Lookup(string? city)

@@ -6,16 +6,19 @@ namespace Weather.Api.Tests;
 public class WeatherReportTests
 {
     [Theory]
-    [InlineData("Riga", 12, "Cloudy", 75)]
-    [InlineData("London", 15, "Rainy", 80)]
-    [InlineData("Oslo", 8, "Cloudy", 65)]
-    [InlineData("Madrid", 26, "Sunny", 35)]
-    [InlineData("Cairo", 32, "Sunny", 25)]
-    public void ReturnsFixedReadings(string city, int temperature, string condition, int humidity)
+    [InlineData("Riga", 12, "Cloudy", 75, "2026-01-15T09:00:00Z")]
+    [InlineData("London", 15, "Rainy", 80, "2026-01-15T09:00:00Z")]
+    [InlineData("Oslo", 8, "Cloudy", 65, "2026-01-15T09:00:00Z")]
+    [InlineData("Madrid", 26, "Sunny", 35, "2026-01-15T09:00:00Z")]
+    [InlineData("Cairo", 32, "Sunny", 25, "2026-01-15T09:00:00Z")]
+    public void ReturnsFixedReadings(string city, int temperature, string condition, int humidity, string observedAt)
     {
         var result = WeatherReport.Lookup(city);
         Assert.Equal(LookupStatus.Success, result.Status);
-        Assert.Equal(new WeatherReading(city, temperature, condition, humidity), result.Reading);
+        var expectedObservedAt = DateTime.Parse(observedAt, System.Globalization.CultureInfo.InvariantCulture,
+            System.Globalization.DateTimeStyles.RoundtripKind);
+        Assert.Equal(new WeatherReading(city, temperature, condition, humidity, expectedObservedAt), result.Reading);
+        Assert.Equal(DateTimeKind.Utc, result.Reading!.ObservedAt.Kind);
         Assert.Equal(result, WeatherReport.Lookup(city));
     }
 
