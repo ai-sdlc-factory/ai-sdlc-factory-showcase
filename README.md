@@ -71,3 +71,7 @@ npm run build
 
 API tests use an in-memory server; web tests use mocked responses. No external
 services are required. `npm test` runs once without watch mode.
+
+## License
+
+MIT, see [LICENSE](LICENSE). This is a showcase project made to demonstrate [AI SDLC Factory](https://github.com/ai-sdlc-factory/ai-sdlc-factory); it is provided as is, without warranty.
