@@ -1,0 +1,150 @@
+{
+  "note": "Tokens and cost as reported by OpenCode. Cost is 0 with a ChatGPT login. The model is the one configured for the role.",
+  "total": {
+    "input": 39516,
+    "output": 1903,
+    "reasoning": 15,
+    "cache_read": 48768,
+    "cache_write": 0,
+    "total": 90202,
+    "cost": 0,
+    "model_steps": 15,
+    "partial": false
+  },
+  "by_role": {
+    "analyst": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 11933,
+        "output": 458,
+        "reasoning": 0,
+        "cache_read": 5248,
+        "cache_write": 0,
+        "total": 17639,
+        "cost": 0,
+        "model_steps": 4,
+        "partial": false
+      }
+    },
+    "developer": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 9665,
+        "output": 1068,
+        "reasoning": 15,
+        "cache_read": 39168,
+        "cache_write": 0,
+        "total": 49916,
+        "cost": 0,
+        "model_steps": 7,
+        "partial": false
+      }
+    },
+    "reviewer": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 10706,
+        "output": 190,
+        "reasoning": 0,
+        "cache_read": 0,
+        "cache_write": 0,
+        "total": 10896,
+        "cost": 0,
+        "model_steps": 2,
+        "partial": false
+      }
+    },
+    "security": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 7212,
+        "output": 187,
+        "reasoning": 0,
+        "cache_read": 4352,
+        "cache_write": 0,
+        "total": 11751,
+        "cost": 0,
+        "model_steps": 2,
+        "partial": false
+      }
+    }
+  },
+  "steps": [
+    {
+      "step": 1,
+      "role": "analyst",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 23.3,
+      "usage": {
+        "input": 11933,
+        "output": 458,
+        "reasoning": 0,
+        "cache_read": 5248,
+        "cache_write": 0,
+        "total": 17639,
+        "cost": 0,
+        "model_steps": 4,
+        "partial": false
+      }
+    },
+    {
+      "step": 2,
+      "role": "developer",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 76.4,
+      "usage": {
+        "input": 9665,
+        "output": 1068,
+        "reasoning": 15,
+        "cache_read": 39168,
+        "cache_write": 0,
+        "total": 49916,
+        "cost": 0,
+        "model_steps": 7,
+        "partial": false
+      }
+    },
+    {
+      "step": 9,
+      "role": "reviewer",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 18.8,
+      "usage": {
+        "input": 10706,
+        "output": 190,
+        "reasoning": 0,
+        "cache_read": 0,
+        "cache_write": 0,
+        "total": 10896,
+        "cost": 0,
+        "model_steps": 2,
+        "partial": false
+      }
+    },
+    {
+      "step": 10,
+      "role": "security",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 11.5,
+      "usage": {
+        "input": 7212,
+        "output": 187,
+        "reasoning": 0,
+        "cache_read": 4352,
+        "cache_write": 0,
+        "total": 11751,
+        "cost": 0,
+        "model_steps": 2,
+        "partial": false
+      }
+    }
+  ]
+}

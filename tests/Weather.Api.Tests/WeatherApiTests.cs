@@ -12,6 +12,19 @@ public class WeatherApiTests : IClassFixture<WebApplicationFactory<Program>>
 
     public WeatherApiTests(WebApplicationFactory<Program> factory) => this.factory = factory;
 
+    [Fact]
+    public async Task ReturnsCanonicalCityObjectsInAlphabeticalOrder()
+    {
+        using var client = factory.CreateClient();
+        using var response = await client.GetAsync("/api/cities");
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal("application/json", response.Content.Headers.ContentType?.MediaType);
+        using var json = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+        Assert.All(json.RootElement.EnumerateArray(), city => Assert.Single(city.EnumerateObject()));
+        Assert.Equal(new[] { "Cairo", "London", "Madrid", "Oslo", "Riga" },
+            json.RootElement.EnumerateArray().Select(city => city.GetProperty("name").GetString()));
+    }
+
     [Theory]
     [InlineData("Riga", "Riga", 12, "Cloudy", 75, "2026-01-15T09:00:00Z", 10.5)]
     [InlineData("lONDON", "London", 15, "Rainy", 80, "2026-01-15T09:00:00Z", 13)]
