@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { getWeather } from './api';
 
-const reading = { city: 'Riga', temperatureC: 12, condition: 'Cloudy', humidityPercent: 75, observedAt: '2026-01-15T09:00:00Z' };
+const reading = { city: 'Riga', temperatureC: 12, condition: 'Cloudy', humidityPercent: 75, observedAt: '2026-01-15T09:00:00Z', feelsLikeC: 10.5 };
 
 describe('getWeather', () => {
   it('returns the reading and encodes the untrimmed city in the URL', async () => {
@@ -46,6 +46,11 @@ describe('getWeather', () => {
 
   it.each([null, 123, '', 'not a timestamp'])('rejects an invalid observation time: %s', async observedAt => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json({ ...reading, observedAt })));
+    await expect(getWeather('Riga')).rejects.toThrow('The weather service returned an invalid reading.');
+  });
+
+  it.each([undefined, '10.5', null, true, {}])('rejects missing or nonnumeric feelsLikeC: %s', async feelsLikeC => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json({ ...reading, feelsLikeC })));
     await expect(getWeather('Riga')).rejects.toThrow('The weather service returned an invalid reading.');
   });
 });

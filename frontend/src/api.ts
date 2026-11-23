@@ -4,6 +4,7 @@ export interface WeatherReading {
   condition: string;
   humidityPercent: number;
   observedAt: string;
+  feelsLikeC: number;
 }
 
 const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5080').replace(/\/$/, '');
@@ -30,6 +31,7 @@ export async function getWeather(city: string): Promise<WeatherReading> {
     || !('temperatureC' in body) || typeof body.temperatureC !== 'number'
     || !('condition' in body) || typeof body.condition !== 'string'
     || !('humidityPercent' in body) || typeof body.humidityPercent !== 'number'
+    || !('feelsLikeC' in body) || typeof body.feelsLikeC !== 'number'
     || !('observedAt' in body) || typeof body.observedAt !== 'string'
     || !Number.isFinite(Date.parse(body.observedAt))) {
     throw new Error('The weather service returned an invalid reading.');
@@ -40,5 +42,6 @@ export async function getWeather(city: string): Promise<WeatherReading> {
     condition: body.condition,
     humidityPercent: body.humidityPercent,
     observedAt: body.observedAt,
+    feelsLikeC: body.feelsLikeC,
   };
 }
