@@ -11,6 +11,13 @@ const reading: WeatherReading = { city: 'Riga', temperatureC: 12, condition: 'Cl
 beforeEach(() => vi.mocked(getWeather).mockReset());
 
 describe('weather search', () => {
+  it('suggests only cities with a weather reading in the city hint', () => {
+    render(<App />);
+    expect(screen.getByRole('textbox', { name: 'City' })).toHaveAccessibleDescription(
+      'Try Riga, London, Oslo, Madrid or Cairo.',
+    );
+  });
+
   it('has a labelled input and starts without a result', () => {
     render(<App />);
     expect(screen.getByRole('textbox', { name: 'City' })).toBeVisible();
