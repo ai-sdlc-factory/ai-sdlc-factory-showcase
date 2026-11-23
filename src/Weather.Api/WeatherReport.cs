@@ -1,6 +1,9 @@
 namespace Weather.Api;
 
-public sealed record WeatherReading(string City, int TemperatureC, string Condition, int HumidityPercent);
+public sealed record WeatherReading(string City, int TemperatureC, string Condition, int HumidityPercent)
+{
+    public decimal FeelsLikeC => Math.Round(TemperatureC - 0.1m * Math.Max(0, HumidityPercent - 60), 1);
+}
 
 public enum LookupStatus { Success, Invalid, NotFound }
 
