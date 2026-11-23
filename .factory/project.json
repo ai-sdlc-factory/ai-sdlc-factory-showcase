@@ -1,0 +1,38 @@
+{
+  "image": "dotnet-node",
+  "mode": "full",
+  "record": true,
+  "reviewers": ["reviewer", "security"],
+  "ui": {
+    "paths": ["frontend/src/**/*.tsx", "frontend/src/**/*.css", "frontend/index.html"],
+    "medium": { "files": 3, "lines": 40 },
+    "large": { "files": 8, "lines": 200 }
+  },
+  "limits": { "build_rounds": 3, "clarification_rounds": 3, "revisions_per_pull_request": 3 },
+  "protected_paths": ["**/Migrations/**", "global.json", "frontend/vite.config.ts"],
+  "rules": [
+    { "id": "no-binaryformatter", "files": "**/*.cs", "forbid": "BinaryFormatter", "message": "Unsafe deserialisation. Use System.Text.Json." },
+    { "id": "no-env-vars", "files": "src/**/*.cs", "forbid": "Environment\\.GetEnvironmentVariable", "message": "Read configuration through IConfiguration or IOptions<T>." },
+    { "id": "no-inner-html", "files": "frontend/src/**/*.tsx", "forbid": "dangerouslySetInnerHTML", "message": "Do not inject HTML; render elements." },
+    { "id": "no-raw-fetch-in-components", "files": "frontend/src/App.tsx", "forbid": "\\bfetch\\(", "message": "Call the API through frontend/src/api.ts.", "severity": "warn" }
+  ],
+  "gates": [
+    { "name": "api-build", "command": ["dotnet", "build", "--nologo", "-v", "q"], "timeout_seconds": 600 },
+    { "name": "api-test", "command": ["dotnet", "test", "--nologo", "-v", "q"], "timeout_seconds": 900 },
+    { "name": "web-install", "command": ["npm", "ci", "--no-audit", "--no-fund"], "cwd": "frontend", "timeout_seconds": 600 },
+    { "name": "web-typecheck", "command": ["npm", "run", "typecheck"], "cwd": "frontend", "timeout_seconds": 300 },
+    { "name": "web-test", "command": ["npm", "test"], "cwd": "frontend", "timeout_seconds": 300 },
+    { "name": "web-build", "command": ["npm", "run", "build"], "cwd": "frontend", "timeout_seconds": 300 }
+  ],
+  "verify": {
+    "image": "browser",
+    "start": ["dotnet", "run", "--project", "src/Weather.Api", "--urls", "http://127.0.0.1:5080"],
+    "ready": "http://127.0.0.1:5080/api/weather/Riga",
+    "startup_timeout_seconds": 90,
+    "tests": "e2e",
+    "suites": [
+      { "name": "api", "command": ["dotnet", "test", "e2e/Api.E2E", "--nologo", "-v", "q"], "timeout_seconds": 600 },
+      { "name": "ui", "command": ["sh", "-c", "npm ci --no-audit --no-fund && npx playwright test"], "cwd": "e2e/ui", "timeout_seconds": 900 }
+    ]
+  }
+}
