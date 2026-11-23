@@ -5,7 +5,7 @@ import App from './App';
 import { getWeather, type WeatherReading } from './api';
 
 vi.mock('./api', () => ({ getWeather: vi.fn() }));
-const reading: WeatherReading = { city: 'Riga', temperatureC: 12, condition: 'Cloudy', humidityPercent: 75, feelsLikeC: 10.5 };
+const reading: WeatherReading = { city: 'Riga', temperatureC: 12, condition: 'Cloudy', humidityPercent: 75, observedAt: '2026-01-15T09:00:00Z', feelsLikeC: 10.5 };
 
 beforeEach(() => vi.mocked(getWeather).mockReset());
 
@@ -35,11 +35,16 @@ describe('weather search', () => {
     expect(result).toHaveTextContent('Temperature12 °CFeels like10.5 °CCondition');
     expect(result).toHaveTextContent('ConditionCloudy');
     expect(result).toHaveTextContent('Humidity75%');
+    expect(result).toHaveTextContent(`Observed at ${new Date(reading.observedAt).toLocaleString()}`);
+    const time = result.querySelector('time');
+    expect(time).toHaveAttribute('datetime', reading.observedAt);
+    expect(time).toHaveTextContent(new Date(reading.observedAt).toLocaleString());
+    expect(result.querySelector('dl')?.nextElementSibling).toContainElement(time);
     expect(screen.getByRole('button', { name: 'Get weather' })).toBeEnabled();
   });
 
   it('displays an integer feels-like value without a trailing decimal zero', async () => {
-    vi.mocked(getWeather).mockResolvedValue({ city: 'London', temperatureC: 15, condition: 'Rainy', humidityPercent: 80, feelsLikeC: 13 });
+    vi.mocked(getWeather).mockResolvedValue({ city: 'London', temperatureC: 15, condition: 'Rainy', humidityPercent: 80, feelsLikeC: 13, observedAt: '2026-01-15T09:00:00Z' });
     const user = userEvent.setup();
     render(<App />);
     await user.type(screen.getByLabelText('City'), 'London');

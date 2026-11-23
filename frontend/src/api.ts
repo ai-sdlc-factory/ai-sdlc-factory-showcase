@@ -3,6 +3,7 @@ export interface WeatherReading {
   temperatureC: number;
   condition: string;
   humidityPercent: number;
+  observedAt: string;
   feelsLikeC: number;
 }
 
@@ -30,7 +31,9 @@ export async function getWeather(city: string): Promise<WeatherReading> {
     || !('temperatureC' in body) || typeof body.temperatureC !== 'number'
     || !('condition' in body) || typeof body.condition !== 'string'
     || !('humidityPercent' in body) || typeof body.humidityPercent !== 'number'
-    || !('feelsLikeC' in body) || typeof body.feelsLikeC !== 'number') {
+    || !('feelsLikeC' in body) || typeof body.feelsLikeC !== 'number'
+    || !('observedAt' in body) || typeof body.observedAt !== 'string'
+    || !Number.isFinite(Date.parse(body.observedAt))) {
     throw new Error('The weather service returned an invalid reading.');
   }
   return {
@@ -38,6 +41,7 @@ export async function getWeather(city: string): Promise<WeatherReading> {
     temperatureC: body.temperatureC,
     condition: body.condition,
     humidityPercent: body.humidityPercent,
+    observedAt: body.observedAt,
     feelsLikeC: body.feelsLikeC,
   };
 }

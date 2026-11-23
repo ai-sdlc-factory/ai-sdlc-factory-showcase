@@ -13,23 +13,24 @@ public class WeatherApiTests : IClassFixture<WebApplicationFactory<Program>>
     public WeatherApiTests(WebApplicationFactory<Program> factory) => this.factory = factory;
 
     [Theory]
-    [InlineData("Riga", "Riga", 12, "Cloudy", 75, 10.5)]
-    [InlineData("lONDON", "London", 15, "Rainy", 80, 13)]
-    [InlineData(" Oslo ", "Oslo", 8, "Cloudy", 65, 7.5)]
-    [InlineData("Madrid", "Madrid", 26, "Sunny", 35, 26)]
-    [InlineData("Cairo", "Cairo", 32, "Sunny", 25, 32)]
-    public async Task ReturnsReadingContract(string input, string city, int temperature, string condition, int humidity, decimal feelsLike)
+    [InlineData("Riga", "Riga", 12, "Cloudy", 75, "2026-01-15T09:00:00Z", 10.5)]
+    [InlineData("lONDON", "London", 15, "Rainy", 80, "2026-01-15T09:00:00Z", 13)]
+    [InlineData(" Oslo ", "Oslo", 8, "Cloudy", 65, "2026-01-15T09:00:00Z", 7.5)]
+    [InlineData("Madrid", "Madrid", 26, "Sunny", 35, "2026-01-15T09:00:00Z", 26)]
+    [InlineData("Cairo", "Cairo", 32, "Sunny", 25, "2026-01-15T09:00:00Z", 32)]
+    public async Task ReturnsReadingContract(string input, string city, int temperature, string condition, int humidity, string observedAt, decimal feelsLike)
     {
         using var client = factory.CreateClient();
         using var response = await client.GetAsync("/api/weather/" + Uri.EscapeDataString(input));
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         using var json = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
         var reading = json.RootElement;
-        Assert.Equal(5, reading.EnumerateObject().Count());
+        Assert.Equal(6, reading.EnumerateObject().Count());
         Assert.Equal(city, reading.GetProperty("city").GetString());
         Assert.Equal(temperature, reading.GetProperty("temperatureC").GetInt32());
         Assert.Equal(condition, reading.GetProperty("condition").GetString());
         Assert.Equal(humidity, reading.GetProperty("humidityPercent").GetInt32());
+        Assert.Equal(observedAt, reading.GetProperty("observedAt").GetString());
         Assert.Equal(JsonValueKind.Number, reading.GetProperty("feelsLikeC").ValueKind);
         Assert.Equal(feelsLike, reading.GetProperty("feelsLikeC").GetDecimal());
     }
