@@ -33,7 +33,7 @@ export default function App() {
       </header>
       <form onSubmit={search}>
         <label htmlFor="city">City</label>
-        <p id="city-help">Try Riga, London, Oslo, Madrid or Cairo.</p>
+        <p id="city-help">Try Riga, London, Oslo, Madrid or Paris.</p>
         <div className="search-row">
           <input
             id="city"
