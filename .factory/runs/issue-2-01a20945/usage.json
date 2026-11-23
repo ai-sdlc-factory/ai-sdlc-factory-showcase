@@ -1,0 +1,183 @@
+{
+  "note": "Tokens and cost as reported by OpenCode. Cost is 0 with a ChatGPT login. The model is the one configured for the role.",
+  "total": {
+    "input": 96926,
+    "output": 12168,
+    "reasoning": 693,
+    "cache_read": 266496,
+    "cache_write": 0,
+    "total": 376283,
+    "cost": 0,
+    "model_steps": 29,
+    "partial": false
+  },
+  "by_role": {
+    "developer": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 15502,
+        "output": 8910,
+        "reasoning": 367,
+        "cache_read": 159232,
+        "cache_write": 0,
+        "total": 184011,
+        "cost": 0,
+        "model_steps": 12,
+        "partial": false
+      }
+    },
+    "reviewer": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 24324,
+        "output": 671,
+        "reasoning": 207,
+        "cache_read": 40064,
+        "cache_write": 0,
+        "total": 65266,
+        "cost": 0,
+        "model_steps": 5,
+        "partial": false
+      }
+    },
+    "security": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 30967,
+        "output": 469,
+        "reasoning": 49,
+        "cache_read": 16640,
+        "cache_write": 0,
+        "total": 48125,
+        "cost": 0,
+        "model_steps": 4,
+        "partial": false
+      }
+    },
+    "ux": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 10198,
+        "output": 269,
+        "reasoning": 54,
+        "cache_read": 12288,
+        "cache_write": 0,
+        "total": 22809,
+        "cost": 0,
+        "model_steps": 3,
+        "partial": false
+      }
+    },
+    "acceptance": {
+      "model": "openai/gpt-6.1-sol",
+      "runs": 1,
+      "usage": {
+        "input": 15935,
+        "output": 1849,
+        "reasoning": 16,
+        "cache_read": 38272,
+        "cache_write": 0,
+        "total": 56072,
+        "cost": 0,
+        "model_steps": 5,
+        "partial": false
+      }
+    }
+  },
+  "steps": [
+    {
+      "step": 1,
+      "role": "developer",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 262.6,
+      "usage": {
+        "input": 15502,
+        "output": 8910,
+        "reasoning": 367,
+        "cache_read": 159232,
+        "cache_write": 0,
+        "total": 184011,
+        "cost": 0,
+        "model_steps": 12,
+        "partial": false
+      }
+    },
+    {
+      "step": 8,
+      "role": "reviewer",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 29.5,
+      "usage": {
+        "input": 24324,
+        "output": 671,
+        "reasoning": 207,
+        "cache_read": 40064,
+        "cache_write": 0,
+        "total": 65266,
+        "cost": 0,
+        "model_steps": 5,
+        "partial": false
+      }
+    },
+    {
+      "step": 9,
+      "role": "security",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 24.1,
+      "usage": {
+        "input": 30967,
+        "output": 469,
+        "reasoning": 49,
+        "cache_read": 16640,
+        "cache_write": 0,
+        "total": 48125,
+        "cost": 0,
+        "model_steps": 4,
+        "partial": false
+      }
+    },
+    {
+      "step": 10,
+      "role": "ux",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 16,
+      "usage": {
+        "input": 10198,
+        "output": 269,
+        "reasoning": 54,
+        "cache_read": 12288,
+        "cache_write": 0,
+        "total": 22809,
+        "cost": 0,
+        "model_steps": 3,
+        "partial": false
+      }
+    },
+    {
+      "step": 11,
+      "role": "acceptance",
+      "model": "openai/gpt-6.1-sol",
+      "attempt": 1,
+      "seconds": 49.3,
+      "usage": {
+        "input": 15935,
+        "output": 1849,
+        "reasoning": 16,
+        "cache_read": 38272,
+        "cache_write": 0,
+        "total": 56072,
+        "cost": 0,
+        "model_steps": 5,
+        "partial": false
+      }
+    }
+  ]
+}

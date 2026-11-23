@@ -1,0 +1,34 @@
+namespace Weather.Api;
+
+public sealed record WeatherReading(string City, int TemperatureC, string Condition, int HumidityPercent);
+
+public enum LookupStatus { Success, Invalid, NotFound }
+
+public sealed record WeatherLookup(LookupStatus Status, WeatherReading? Reading = null, string? Error = null);
+
+public static class WeatherReport
+{
+    private static readonly Dictionary<string, WeatherReading> Readings = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["Riga"] = new("Riga", 12, "Cloudy", 75),
+        ["London"] = new("London", 15, "Rainy", 80),
+        ["Oslo"] = new("Oslo", 8, "Cloudy", 65),
+        ["Madrid"] = new("Madrid", 26, "Sunny", 35),
+        ["Cairo"] = new("Cairo", 32, "Sunny", 25)
+    };
+
+    public static WeatherLookup Lookup(string? city)
+    {
+        if (string.IsNullOrWhiteSpace(city))
+            return new(LookupStatus.Invalid, Error: "Enter a city name.");
+        if (city.Length > 60)
+            return new(LookupStatus.Invalid, Error: "City names must be at most 60 characters.");
+        if (city.EnumerateRunes().Any(character => !System.Text.Rune.IsLetter(character)
+            && character.Value is not (' ' or '-' or '\'')))
+            return new(LookupStatus.Invalid, Error: "City names may contain only letters, spaces, hyphens and apostrophes.");
+
+        return Readings.TryGetValue(city.Trim(), out var reading)
+            ? new(LookupStatus.Success, reading)
+            : new(LookupStatus.NotFound, Error: "No weather reading is available for this city.");
+    }
+}
