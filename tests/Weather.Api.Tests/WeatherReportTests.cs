@@ -5,6 +5,15 @@ namespace Weather.Api.Tests;
 
 public class WeatherReportTests
 {
+    [Fact]
+    public void ReturnsCanonicalCitiesInOrdinalOrder()
+    {
+        var cities = WeatherReport.GetCities();
+        Assert.Equal(new[] { "Cairo", "London", "Madrid", "Oslo", "Riga" }, cities);
+        foreach (var city in cities)
+            Assert.Equal(city, WeatherReport.Lookup(city).Reading?.City);
+    }
+
     [Theory]
     [InlineData("Riga", 12, "Cloudy", 75)]
     [InlineData("London", 15, "Rainy", 80)]

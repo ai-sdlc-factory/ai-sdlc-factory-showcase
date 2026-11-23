@@ -17,6 +17,11 @@ public static class WeatherReport
         ["Cairo"] = new("Cairo", 32, "Sunny", 25)
     };
 
+    public static string[] GetCities() => Readings.Values
+        .Select(reading => reading.City)
+        .OrderBy(city => city, StringComparer.Ordinal)
+        .ToArray();
+
     public static WeatherLookup Lookup(string? city)
     {
         if (string.IsNullOrWhiteSpace(city))
