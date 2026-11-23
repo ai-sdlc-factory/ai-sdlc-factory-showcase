@@ -10,7 +10,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
     app.UseCors("LocalWeb");
 
-app.MapGet("/api/cities", () => Results.Ok(WeatherReport.GetCities()));
+app.MapGet("/api/cities", () => Results.Ok(WeatherReport.GetCities().Select(city => new { name = city })));
 
 app.MapGet("/api/weather/{city?}", (string? city) =>
 {
