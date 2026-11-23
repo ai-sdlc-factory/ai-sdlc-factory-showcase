@@ -25,7 +25,7 @@ label { display: block; font-weight: 700; }
 #city-help { margin: 0.25rem 0 0.75rem; color: #38566d; }
 .search-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 input, button { font: inherit; border-radius: 0.4rem; padding: 0.75rem; }
-input { flex: 1 1 12rem; min-width: 0; width: 100%; border: 1px solid #536f85; }
+input { flex: 1 1 12rem; min-width: 0; width: 100%; border: 1px solid #536f85; color: #172c40; background: #fff; }
 button { background: #164e75; color: #fff; border: 1px solid #164e75; cursor: pointer; }
 button:hover { background: #103b59; }
 button:disabled { background: #465b6a; cursor: wait; }
@@ -36,3 +36,16 @@ dl div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.
 dt { font-weight: 600; }
 dd { margin: 0; }
 .error { background: #fff0f0; color: #8a1c1c; padding: 1rem; border: 1px solid #8a1c1c; border-radius: 0.5rem; }
+
+@media (prefers-color-scheme: dark) {
+  :root { color-scheme: dark; color: #e6edf3; background: #101820; }
+  main { background: #1b2936; border-color: #829bad; }
+  .eyebrow, #city-help { color: #b6c7d5; }
+  input { color: #e6edf3; background: #101820; border-color: #829bad; }
+  button { color: #101820; background: #91c9ef; border-color: #91c9ef; }
+  button:hover { background: #b9dff8; }
+  button:disabled { color: #e6edf3; background: #465b6a; border-color: #829bad; }
+  :focus-visible { outline-color: #ffd479; }
+  .reading { background: #243b4d; }
+  .error { color: #ffc4c4; background: #482626; border-color: #ffc4c4; }
+}
